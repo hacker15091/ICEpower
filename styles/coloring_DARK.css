@@ -1,0 +1,164 @@
+﻿body 
+{
+    background-color:#ffffff;
+}
+
+.page
+{
+    background-color:rgba(0,0,0,0.6);
+    color:White;
+}
+
+.menuItem a
+{
+    background-color:#2a1911;
+    font-family:'Shadows Into Light', cursive;
+    color:White; 
+      
+}
+
+.menuItem a:hover
+{
+    background-color:rgb(19,96,15);
+    color:#2a1911;    
+    box-shadow: 0px 0px 20px rgb(14,70,11);  
+}
+
+#userS a,#gameUL a
+{
+    background-color:transparent;
+    color:White;
+    
+}
+
+#userS a:hover,#gameUL a:hover
+{
+    color:rgb(19,96,15);
+    box-shadow:none;
+}
+
+
+.login
+{
+    background-color:#2a1911;
+    color:White;
+    border:2px solid rgba(14,70,11,0.7);
+    box-shadow: 0px 0px 20px rgb(14,70,11);
+    font-family:'Shadows Into Light', cursive;
+}
+
+.login .textbox
+{
+    
+    font-family:'Montserrat';
+}
+
+.tester
+{
+   border: 5px solid rgba(14, 70, 11, 0.5);
+  
+   background-color:#2a1911;
+   box-shadow: 0px 0px 15px rgb(14,70,11);
+   
+}
+
+header h6
+{
+    color:rgb(215,191,84);
+    
+    font-family: 'Shadows Into Light', cursive;
+    text-shadow:5px 5px 5px black;
+}
+
+#inner h1
+{
+    color:rgb(215,191,84);
+    font-family: 'Shadows Into Light', cursive;
+    text-shadow:5px 5px 10px rgb(145,125,34);
+}
+
+#inner h2
+{
+    color:rgb(215,191,84);
+    font-family: 'Shadows Into Light', cursive;
+    text-shadow:5px 5px 10px rgb(145,125,34);
+}
+
+#inner p
+{
+    font-family: 'Montserrat', sans-serif;
+    line-height:20px;
+    text-shadow:5px 5px 7px black;
+    
+    /* from w3schools.com */
+    -webkit-column-rule:3px groove rgb(215,191,84); /* Chrome, Safari, Opera */
+    -moz-column-rule:3px groove rgb(215,191,84); /* Firefox */
+    column-rule:3px groove rgb(215,191,84); 
+}
+
+#homeP
+{
+    -webkit-column-rule:0px;
+    -moz-column-rule:0px;
+    column-rule:0px;
+}
+
+nav
+{
+    background-color:#2a1911;
+    height:32px;
+}
+
+footer 
+{
+    border-top:3px Dashed rgb(215,191,84);
+    color:White;
+}
+
+footer a
+{
+    color:White;
+}
+
+#rollPics
+{
+    border:3px solid black;
+}
+
+#inner p a
+{
+    text-decoration:none;
+    color:rgb(215,191,84);
+}
+
+#inner p a:hover
+{
+    text-decoration:underline overline;
+    color:White;
+}
+
+.frm
+{
+    font-family: 'Montserrat', sans-serif;  
+}
+
+.frm fieldset
+{
+    border:3px groove rgb(215,191,84);
+}
+
+.error
+{
+    background-color:Red;
+    color:White;
+}
+
+h3
+{
+    speak:normal;
+    color:White;
+    font-family: 'Montserrat', sans-serif;  
+    font-size:20px;
+    width:500px;
+}
+    

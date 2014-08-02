@@ -1,0 +1,81 @@
+﻿    @helper logout(Database db, bool antiNull, string username)
+        {
+            string Query = "UPDATE users SET Online=0 WHERE username = '" + username + "';'";
+            db.Execute(Query);
+            antiNull = false;
+        }
+
+    @helper styleChange(Database db, string style, string username)
+        {
+            string Query = "UPDATE users SET style='" + style + "' WHERE username = '" + username + "';'";
+            db.Execute(Query);
+        }
+
+        @helper form0()
+            {
+             <form method="post" action="" autocomplete=on class="frm">
+                <fieldset>
+                    <legend>User information</legend>
+                      <label for="name">First name:</label><input tabindex="1" size="25" type="text" name="fname" placeholder="First name"/><br />
+                      <label for="surname">Last name:</label><input tabindex="2" size="25" type="text" name="lname" placeholder="Last name"/><br />
+                      <label for="email">Email:</label><input id="email" tabindex="3" size="50" type="email" name="email" placeholder="Email"/><br />
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend>Login details</legend> 
+                      <label for="username">Username:</label><input tabindex="4" size="25" type="text" name="uname" placeholder="Username"/><br />
+                      <label for="password">Password:</label><input tabindex="5" size="25" type="password" id="pass1" name="pass1" placeholder="Password" oninput="test()"/><br />
+                      <label for="cpassword">Confirm Password:</label><input tabindex="6" size="25" type="password" id="pass2" name="pass2" placeholder="Confirm Password" oninput="test()"/><img id="validPass" src="http://i806.photobucket.com/albums/yy341/hacker15091/reddot.png" alt="reddot" /><br />
+                </fieldset>
+                <div class="frmBTN"><button type="submit" id="register" disabled>Register</button><button type="reset"  id="reset">Clear</button></div>
+                </form>
+        }
+
+        @helper form1()
+            {
+            <p>Invalid username... Please try again</p>
+                 <form method="post" action="" autocomplete=on class="frm">
+                <fieldset>
+                    <legend>User information</legend>
+                      <label for="name">First name:</label><input tabindex="1" size="25" type="text" name="fname" placeholder="First name"/><br />
+                      <label for="surname">Last name:</label><input tabindex="2" size="25" type="text" name="lname" placeholder="Last name"/><br />
+                      <label for="email">Email:</label><input id="email" tabindex="3" size="50" type="email" name="email" placeholder="Email"/><br />
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend>Login details</legend> 
+                      <label for="username">Username:</label><input class="error" tabindex="4" size="25" type="text" name="uname" placeholder="Username"/><br />
+                      <label for="password">Password:</label><input tabindex="5" size="25" type="password" id="pass1" name="pass1" placeholder="Password" oninput="test()"/><br />
+                      <label for="cpassword">Confirm Password:</label><input tabindex="6" size="25" type="password" id="pass2" name="pass2" placeholder="Confirm Password" oninput="test()"/><img id="validPass" src="http://i806.photobucket.com/albums/yy341/hacker15091/reddot.png" alt="reddot" /><br />
+                </fieldset>
+                <div class="frmBTN"><button type="submit"  id="register" disabled>Register</button><button type="reset"  id="reset">Clear</button></div>
+                </form>
+        }
+
+                @helper form3()
+                    {
+             <form method="post" action="" autocomplete=on class="frm">
+                <fieldset>
+                    <legend>User information</legend>
+                      <label for="name">First name:</label><input id="fname"tabindex="1" size="25" type="text" name="fname" placeholder="First name"/><br />
+                      <label for="surname">Last name:</label><input id="lname" tabindex="2" size="25" type="text" name="lname" placeholder="Last name"/><br />
+                      <label for="email">Email:</label><input id="email" tabindex="3" size="50" type="email" name="email" placeholder="Email"/><br />
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend>Login details</legend> 
+                      <label for="username">Username:</label><input id="username" tabindex="4" size="25" type="text" name="uname" placeholder="Username" disabled/><br />
+                      <label for="password">Old Password:</label><input tabindex="5" size="25" type="password" id="Opass" name="Opass" placeholder="Old Password" /><br />
+                      <label for="password">New Password:</label><input tabindex="5" size="25" type="password" id="pass1" name="pass1" placeholder="Password"oninput="test()" /><br />
+                      <label for="cpassword">Confirm Password:</label><input tabindex="6" size="25" type="password" id="pass2" name="pass2" placeholder="Confirm Password" oninput="test()"/><img id="validPass" src="http://i806.photobucket.com/albums/yy341/hacker15091/reddot.png" alt="reddot" /><br />
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend>Styles</legend>
+                        <label for="style">Please select a style</label><br />
+                        <input type="radio" name="style" value="coloring_DARK.css" onchange="setStyle('coloring_DARK.css')" id="dark" />Dark style<br />
+                        <input type="radio" name="style" value="coloring_LIGHT.css" onchange="setStyle('coloring_LIGHT.css')" id="light" />Light style
+                </fieldset>
+                <div class="frmBTN"><button type="submit" id="save">Save</button></div>
+                </form>
+            }

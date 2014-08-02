@@ -1,0 +1,167 @@
+﻿@{
+    var db = Database.Open("localDB");
+    var Query = "SELECT * FROM users";
+    bool antiNull = false; 
+    string username="";
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@Page.Title</title>
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link href="styles/layout.css" rel="stylesheet" type="text/css" />
+        <link id="style" href="styles/coloring_DARK.css" rel="stylesheet" type="text/css" />
+        <script src="scripts/menu.js" type="text/javascript"></script>
+        <script src="scripts/elements.js" type="text/javascript"></script>
+        <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <script src="scripts/js-image-slider.js" type="text/javascript"></script>
+        <link href="styles/js-image-slider.css" rel="stylesheet" type="text/css" />
+        <script src="scripts/register_odds.js" type="text/javascript"></script>
+    </head>
+    <body>
+            <div class="login">
+        <div id ="logged"> 
+        
+        @{
+                if (IsPost)
+                { 
+                username = Request["unname"]; 
+                    
+                string password = Request["pass"];
+                    bool found = false; 
+                    foreach (var row in db.Query(Query))
+                    {
+                         if (username == @row.username)
+                         {
+                             found = true;
+                             if (password == @row.password)
+                         {
+                             <p><span id="decoded">Welcome @row.name</span>
+                                <span id="encoded"></span></p>
+                             Query = "UPDATE users SET Online=1 WHERE username = '" + username + "';'";
+                             db.Execute(Query);
+                             <script type="text/javascript">userloggedIn("@username", "@password", "@row.style")</script>
+                             antiNull = true;
+                             WebCache.Set("username", @username);
+                             
+                                                         
+                         }
+                         else {
+                            <p>Invalid password for @username please retry</p>
+                            <form method="post" action="">
+                            Username: <input name="unname"class="textbox" type="text"/> Password: <input name="pass"class="textbox" type="password" />
+                            <input type="submit" value="Login" class="submit"> </form>                                  
+                         }
+                         }                         
+                    }
+                    if (found == false)
+                    {
+                     <p>Please <a href="register.cshtml">register!</a></p>
+                    }
+                }
+                else
+                {
+<form   method="post" action="">
+Username: <input name="unname"class="textbox" id="uname"type="text" /> Password: <input name="pass" id="pass"class="textbox" type="password" />
+<input type="submit" value="Login" id ="submit" class="submit"><button onclick="registerPage()" class="noSubmit" type="button">Register</button>
+</form> 
+}
+
+foreach (var row in db.Query(Query))
+        {
+            <script type="text/javascript">loggedUser("@row.username")</script>
+        }
+    
+}        
+        </div>
+        </div>
+        <header>
+            <a title="Home Page" href="home.cshtml"><img src="images/logo.png" alt="logo"/></a>
+            <div>
+                <h6 title="The creator">by James Filmer - 212289853</h6>
+            </div>
+        </header>
+        <nav role="navigation">
+            
+                    <ul class="menu">
+                        <li class="menuItem">
+                            <a href="home.cshtml" title="Home Page">Home</a>
+                        </li>
+                        <li class="menuItem">
+                            <a href="#" onmousemove="show('gameUL')" onmouseout="hide('gameUL')" >Game</a>
+                            <div class="nav-wrp" id="game">                                
+                                <div class ="nav-wrp-pos">
+                                    <ul class ="UL" id="gameUL" onmouseout="hide('gameUL')" onmousemove="show('gameUL')">
+                                    <div class="tester">
+                                        <li>
+                                            <a title="Basic game plot" href="info.cshtml" onmousemove="show('gameUL')">- Info</a>
+                                        </li>
+                                        <li>
+                                            <a title="General 'feel' for the game"href="gameplay.cshtml" onmousemove="show('gameUL')">- Gameplay</a>
+                                        </li>
+                                        <li>
+                                            <a title="Extra content" href="DLC.cshtml" onmousemove="show('gameUL')">- DLC's</a>
+                                        </li>
+                                        </div>
+                                    </ul>                                
+                            </div>
+                            </div>
+                        </li>
+                        <li class="menuItem">
+                            <a title="The offical Reckoning site"href="http://www.reckoningthegame.com/" target=_blank>Offical Site</a>
+                        </li>
+                     
+                        <li class="menuItem">
+                            <a title="Company information" href="company.cshtml">Company info</a>
+                        </li>
+
+                        <li class="menuItem" id="userstuff">
+                            <a href=""  onmousemove="show('userS')" onmouseout="hide('userS')">User</a>
+                            <div class="nav-wrp" id="user">                                
+                                <div class ="nav-wrp-pos">
+                                    <ul class ="UL" id="userS" onmouseout="hide('userS')" onmousemove="show('userS')">
+                                    <div class="tester">
+                                        <li>
+                                            <a title="User settings and information"href="userinfo.cshtml" onmousemove="show('userS')">- User Info</a>
+                                        </li>
+                                        <li>
+                                            <a title="User logout command" onclick="logout()" href="@myhelpers.logout(db, antiNull, username)" onmousemove="show('userS')">- Logout</a>
+                                        </li>
+                                        </div>
+                                    </ul>                                
+                            </div>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                           
+                </nav>
+
+        <div class="page">
+            <div id="inner">
+                            <a href="images/large/Dokkalfar_L.png" target=_blank title="Dokkalfar">
+                            <img class="hIMG" src="images/Dokkalfar.png" alt="Dokkalfar"/></a>
+                            <a href="images/large/Almain_L.png" target=_blank title="Almain">
+                            <img class="hIMG" src="images/Almain.png" alt="Almain"/></a>
+                            <a href="images/large/Ljosalfar_L.png" target=_blank title="Ljosalfar">
+                            <img class="hIMG" src="images/Ljosalfar.png" alt="Ljosalfar"/></a>
+        @RenderBody()
+
+                        <footer>Designed by <a href="http://facebook.com/hacker15091/" target="_blank">James Filmer</a>, all info from <a href="http://en.wikipedia.org/wiki/Kingdoms_of_Amalur:_Reckoning">Wikipedia</a></footer>
+           </div>
+        </div>
+
+        
+        
+        @{ if (antiNull == true)
+           {
+               <script type="text/javascript">doAll()</script>
+               antiNull = false;
+            }
+            Page.username = username;
+ 
+        }
+    </body>
+</html>

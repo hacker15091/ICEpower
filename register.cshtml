@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+    Page.Title = "Kingdoms of Amalur - Register";
+    string uname="";
+    Page.username = uname;
+
+    WebMail.SmtpServer = "smtp-mail.outlook.com";
+    WebMail.SmtpPort = 25;
+    WebMail.EnableSsl = true ;
+    WebMail.UserName = "james@hacker15091.co.za";
+    WebMail.Password = "!!@##.co.za";
+    WebMail.From = "james@hacker15091.co.za";
+}
+
+                <h1>Registration</h1>
+                <div id="regi"> 
+                @{
+
+                    Database db = Database.Open("localDB");
+                    string Query;
+                    string tpass, email, rname, rsname;
+                    if (IsPost)
+                    {
+                        uname = Request["uname"];
+                        tpass = Request["pass2"];
+                        rname = Request["fname"];
+                        rsname = Request["lname"];
+                        email = Request["email"];
+                        
+                        Query = "SELECT * FROM users";
+                        bool exists = false;
+
+                        foreach (var row in db.Query(Query))
+                        {
+                            if (uname == row.username){
+                                exists = true;
+                            }
+                        }
+
+                        if (exists == true)
+                        {
+                           @myhelpers.form1();  
+                        }
+                        else {
+                            Query = "INSERT INTO users(username,password,name,surname,online,style,email) VALUES ('"+uname+"','"+tpass+"','"+rname+"','"+rsname+"',0,'coloring_DARK.css','"+email+"');";
+                            db.Execute(Query);
+                            <h3>Welcome to the Kingdoms of Amalur...</h3>
+                    string bdymsg = "<h1>Welcome to Kingdoms of Amalur</h1> <br/> <p>Greetings "+rname+" <br /><br /> Recently you joined us on our website and with that you registered...<br />For safety we have sent you an email with your log in details, please make sure to keep it safe<br /> <br /> <br />  Username: "+uname+"<br />  Password: "+tpass+"<br /> <br />  Please join us again <br /> <br /> Kind regards <br/> <a href='mailto:james@hacker15091.co.za'>James Filmer</a></p>";
+                    WebMail.Send(to: email, subject: "Welcome to Kingdoms of Amalur: Reckoning", body: bdymsg);
+
+                        }
+                    }
+                    else
+                    {                 
+                        @myhelpers.form0();
+                    }
+                    
+                    }
+                    
+                    </div>

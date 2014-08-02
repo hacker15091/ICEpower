@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+    Page.Title = "Kingdoms of Amalur - User info";
+}
+
+<h1>User information</h1>
+
+        @{
+            var db = Database.Open("localDB");
+            var user = WebCache.Get("username");
+            string Query;
+            if (IsPost)
+            {
+                
+                var name = Request["fname"];
+                var sname = Request["lname"];
+                var email = Request["email"];
+                var pass = Request["Opass"];
+                var pass1 = Request["pass1"];
+                var pass2 = Request["pass2"];
+                var style = Request["style"];
+                    
+                
+                if (pass2 != "")
+                {
+                    Query = "UPDATE users SET name='"+name+"',surname='"+sname+"',email='"+email+"',style='"+style+"', password='"+pass2+"' WHERE ((username='"+user+"') AND (password='"+pass+"'))";
+                }
+                else
+                {
+                    Query = "UPDATE users SET name='"+name+"',surname='"+sname+"',email='"+email+"',style='"+style+"' WHERE (username='"+user+"')";
+                }
+                db.Execute(Query);
+           
+                Query = "SELECT * FROM users";
+
+                foreach (var row in db.Query(Query))
+                {
+                    if (user == row.username)
+                    {
+                    @myhelpers.form3();
+                    <script type="text/javascript">
+                        FillUser("username", "@row.username");
+                        FillUser("fname", "@row.name");
+                        FillUser("lname", "@row.surname");
+                        FillUser("email", "@row.email");
+                        style("@row.style");
+                    </script>
+                    } 
+                    }
+                    }
+                    
+            else
+            {
+              Query = "SELECT * FROM users";
+
+                foreach (var row in db.Query(Query))
+                {
+                    if (user == row.username)
+                    {
+                    @myhelpers.form3();
+                    <script type="text/javascript">
+                        FillUser("username", "@row.username");
+                        FillUser("fname", "@row.name");
+                        FillUser("lname", "@row.surname");
+                        FillUser("email", "@row.email");
+                        style("@row.style");
+                    </script>
+                    } 
+                    }
+            }
+        }
+                        
